@@ -8,7 +8,7 @@ export default function Center(props) {
      alignItems="center"
      justifyContent="center"
      sx={{ minHeight: '100vh' }}>
-      <Grid item sx={1}>
+      <Grid item xs={1}>
         {props.children}
       </Grid>
     </Grid>
