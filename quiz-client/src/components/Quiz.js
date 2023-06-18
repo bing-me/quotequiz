@@ -48,7 +48,7 @@ export default function Quiz() {
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, );
 
   const updateAnswer = (qnId, optionIdx) => {
     const temp = [...context.selectedOptions];

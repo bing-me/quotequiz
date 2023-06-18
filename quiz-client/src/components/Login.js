@@ -27,7 +27,7 @@ export default function Login() {
 
   useEffect(() => {
     resetContext();
-  }, []);
+  }, );
 
   const login = (e) => {
     e.preventDefault();
