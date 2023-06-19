@@ -11,6 +11,7 @@ import {
   Typography,
   Box,
   LinearProgress,
+  Button,
 } from "@mui/material";
 import { getFormatedTime } from "../helper";
 import { useNavigate } from "react-router";
@@ -19,6 +20,7 @@ export default function Quiz() {
   const [qns, setQns] = useState([]);
   const [qnIndex, setQnIndex] = useState(0);
   const [timeTaken, setTimeTaken] = useState(0);
+  const [isQuizStarted, setIsQuizStarted] = useState(false); // Track if quiz has started
   const { context, setContext } = useStateContext();
   const navigate = useNavigate();
 
@@ -65,49 +67,72 @@ export default function Quiz() {
     }
   };
 
-  return qns.length !== 0 ? (
-    <Card
-      sx={{
-        maxWidth: 640,
-        mx: "auto",
-        mt: 5,
-        "& .MuiCardHeader-action": { m: 0, alignSelf: "center" },
-      }}
-    >
-      <CardHeader
-        title={"Question " + (qnIndex + 1) + " of 5"}
-        action={<Typography>{getFormatedTime(timeTaken)}</Typography>}
-      />
-      <Box>
-        <LinearProgress
-          variant="determinate"
-          value={((qnIndex + 1) * 100) / 5}
-        />
-      </Box>
-      {qns[qnIndex].imageName != null ? (
-        <CardMedia
-          component="img"
-          image={BASE_URL + "images/" + qns[qnIndex].imageName}
-          sx={{ width: "auto", m: "10px auto" }}
-        />
-      ) : null}
-      <CardContent>
-        <Typography variant="h6">{qns[qnIndex].qnInWords}</Typography>
-        <List>
-          {qns[qnIndex].options.map((item, idx) => (
-            <ListItemButton
-              disableRipple
-              key={idx}
-              onClick={() => updateAnswer(qns[qnIndex].qnId, idx)}
-            >
-              <div>
-                <b>{String.fromCharCode(65 + idx) + " . "}</b>
-                {item}
-              </div>
-            </ListItemButton>
-          ))}
-        </List>
-      </CardContent>
-    </Card>
-  ) : null;
+  const handleQuizStart = () => {
+    setIsQuizStarted(true);
+    startTimer();
+  };
+
+  return (
+    <div>
+      {!isQuizStarted && (
+        <Card
+        sx={{
+          maxWidth: 640,
+          mx: "auto",
+          mt: 5,
+          display: "flex",
+          justifyContent: "center",
+        }}>
+          <Button variant="contained" onClick={handleQuizStart}>
+            Click to Begin
+          </Button>
+        </Card>
+      )}
+      {isQuizStarted && qns.length !== 0 && (
+        <Card
+          sx={{
+            maxWidth: 640,
+            mx: "auto",
+            mt: 5,
+            "& .MuiCardHeader-action": { m: 0, alignSelf: "center" },
+          }}
+        >
+          <CardHeader
+            title={"Question " + (qnIndex + 1) + " of 5"}
+            action={<Typography>{getFormatedTime(timeTaken)}</Typography>}
+          />
+          <Box>
+            <LinearProgress
+              variant="determinate"
+              value={((qnIndex + 1) * 100) / 5}
+            />
+          </Box>
+          {qns[qnIndex].imageName != null ? (
+            <CardMedia
+              component="img"
+              image={BASE_URL + "images/" + qns[qnIndex].imageName}
+              sx={{ width: "auto", m: "10px auto" }}
+            />
+          ) : null}
+          <CardContent>
+            <Typography variant="h6">{qns[qnIndex].qnInWords}</Typography>
+            <List>
+              {qns[qnIndex].options.map((item, idx) => (
+                <ListItemButton
+                  disableRipple
+                  key={idx}
+                  onClick={() => updateAnswer(qns[qnIndex].qnId, idx)}
+                >
+                  <div>
+                    <b>{String.fromCharCode(65 + idx) + " . "}</b>
+                    {item}
+                  </div>
+                </ListItemButton>
+              ))}
+            </List>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
 }
