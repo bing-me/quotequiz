@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import Authenticate from './components/Authenticate';
 import Layout from './components/Layout';
 import Quiz from './components/Quiz';
-// import Result from './components/Result';
+import Result from './components/Result';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         {/* <Route element={<Authenticate />}> */}
           <Route path="/" element={<Layout />}>
             <Route path="/quiz" element={<Quiz />} />
-            {/* <Route path="/result" element={<Result />} /> */}
+            <Route path="/result" element={<Result />} />
           {/* </Route> */}
         </Route>
       </Routes>
