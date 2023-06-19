@@ -12,6 +12,10 @@ export default function Layout() {
     navigate("/");
   };
 
+  const leaderboard = () => {
+    navigate("/leaderboard");
+  };
+
   return (
     <>
       <AppBar position="sticky">
@@ -19,6 +23,7 @@ export default function Layout() {
           <Typography variant="h4" align="center" sx={{ flexGrow: 1 }}>
             Quote Quiz
           </Typography>
+          <Button onClick={leaderboard}>Leaderboard</Button>
           <Button onClick={logout}>Logout</Button>
         </Toolbar>
       </AppBar>
