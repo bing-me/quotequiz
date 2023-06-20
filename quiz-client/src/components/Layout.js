@@ -1,10 +1,11 @@
-import { AppBar, Button, Container, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Container, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import { Outlet, useNavigate } from "react-router";
 import { useStateContext } from "../hooks/useStateContext";
+// import restart from "Results";
 
 export default function Layout() {
-  const { resetContext } = useStateContext();
+  const { resetContext, setContext } = useStateContext();
   const navigate = useNavigate();
 
   const logout = () => {
@@ -16,15 +17,26 @@ export default function Layout() {
     navigate("/leaderboard");
   };
 
+  const restart = () => {
+    setContext({
+      timeTaken: 0,
+      selectedOptions: [],
+    });
+    navigate("/quiz");
+  };
+
   return (
     <>
       <AppBar position="sticky">
-        <Toolbar sx={{ width: 640, m: "auto" }}>
-          <Typography variant="h4" align="center" sx={{ flexGrow: 1 }}>
+        <Toolbar sx={{ width: '90%', m: "auto", display: 'flex', justifyContent: 'space-between' }}>
+          <Typography variant="h4" align="center" sx={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
             Quote Quiz
           </Typography>
-          <Button onClick={leaderboard}>Leaderboard</Button>
-          <Button onClick={logout}>Logout</Button>
+          <Box position='absolute' left='80%' >
+            <Button onClick={restart}>Re-try Quiz</Button>
+            <Button onClick={leaderboard}>Leaderboard</Button>
+            <Button onClick={logout}>Logout</Button>
+          </Box>
         </Toolbar>
       </AppBar>
       <Container>

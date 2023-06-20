@@ -29,17 +29,17 @@ export default function Result() {
       .then((res) => {
         const qna = context.selectedOptions.map((x) => ({
           ...x,
-          ...res.data.find((y) => y.qnId == x.qnId),
+          ...res.data.find((y) => y.qnId === x.qnId),
         }));
         setQnAnswers(qna);
         calculateScore(qna);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, );
 
   const calculateScore = (qna) => {
     let tempScore = qna.reduce((acc, curr) => {
-      return curr.answer == curr.selected ? acc + 1 : acc;
+      return curr.answer === curr.selected ? acc + 1 : acc;
     }, 0);
     setScore(tempScore);
   };

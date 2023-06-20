@@ -6,6 +6,7 @@ export const ENDPOINTS = {
   participant: "participant",
   question: "questions",
   getAnswers: "questions/getanswers",
+  leaderboard: "participant/leaderboard",
 };
 
 export const createAPIEndpoint = (endpoint) => {
