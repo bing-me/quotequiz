@@ -27,7 +27,7 @@ export default function Login() {
 
   useEffect(() => {
     resetContext();
-  }, );
+  }, []);
 
   const login = (e) => {
     e.preventDefault();
@@ -51,48 +51,74 @@ export default function Login() {
 
   return (
     <Center>
-      <Card sx={{ width: 400 }}>
-        <CardContent sx={{ textAlign: "center" }}>
-          <Typography variant="h3" sx={{ my: 3 }}>
-            Quote Quiz
-          </Typography>
-          <Box
-            sx={{
-              "& .MuiTextField-root": {
-                m: 1,
-                width: "90%",
-              },
-            }}
-          >
-            <form noValidate autoComplete="off" onSubmit={login}>
-              <TextField
-                label="Email"
-                name="email"
-                value={values.email}
-                onChange={handleInputChange}
-                variant="outlined"
-                {...(errors.email && { error: true, helperText: errors.email })}
-              />
-              <TextField
-                label="Name"
-                name="name"
-                value={values.name}
-                onChange={handleInputChange}
-                variant="outlined"
-                {...(errors.name && { error: true, helperText: errors.name })}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                size="large"
-                sx={{ width: "90%" }}
-              >
-                Start
-              </Button>
-            </form>
-          </Box>
-        </CardContent>
-      </Card>
+      <Box
+        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      >
+        <Card sx={{ width: 720 }}>
+          <CardContent sx={{ textAlign: "center" }}>
+            <Typography variant="h3" sx={{ my: 3 }}>
+              Movie Quote Quiz
+            </Typography>
+            <Typography variant="body1" sx={{ my: 3 }}>
+              Welcome to the Movie Quote Quiz, the challenge for movie
+              buffs and cinephiles! Get ready to put your film knowledge to the
+              test and see if you can identify some of the most iconic lines
+              from movies spanning several decades.
+            </Typography>
+            <Typography variant="body1" sx={{ my: 3 }}>
+              From the captivating 1970s to the exhilarating 2010s, this quiz takes you
+              on a journey through cinematic history, showcasing memorable
+              quotes from a wide range of movies.
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card sx={{ width: 400, mt: 5 }}>
+          <CardContent sx={{ textAlign: "center" }}>
+            <Typography variant="body1" sx={{ my: 3 }}>
+              Register/Login with an email and username.
+              Only your username will be displayed on the leaderboard.
+            </Typography>
+            <Box
+              sx={{
+                "& .MuiTextField-root": {
+                  m: 1,
+                  width: "90%",
+                },
+              }}
+            >
+              <form noValidate autoComplete="off" onSubmit={login}>
+                <TextField
+                  label="Email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleInputChange}
+                  variant="outlined"
+                  {...(errors.email && {
+                    error: true,
+                    helperText: errors.email,
+                  })}
+                />
+                <TextField
+                  label="Name"
+                  name="name"
+                  value={values.name}
+                  onChange={handleInputChange}
+                  variant="outlined"
+                  {...(errors.name && { error: true, helperText: errors.name })}
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  sx={{ width: "90%" }}
+                >
+                  Start
+                </Button>
+              </form>
+            </Box>
+          </CardContent>
+        </Card>
+      </Box>
     </Center>
   );
 }

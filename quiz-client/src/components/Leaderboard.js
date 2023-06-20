@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { Table } from "reactable";
 import { createAPIEndpoint, ENDPOINTS } from "../api";
-// import { useStateContext } from "../hooks/useStateContext";
 import {
   Box,
   Card,
@@ -14,15 +12,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-// import Paper from '@mui/material/Paper';
-/* import { Box } from "@mui/system";
-import { useNavigate } from "react-router";
-import { getFormatedTime } from "../helper";
-import { green } from "@mui/material/colors";
- */
 
 export default function Leaderboard() {
-  // const { context } = useStateContext();
   const [participants, setParticipants] = useState([]);
 
   useEffect(() => {
@@ -54,7 +45,6 @@ export default function Leaderboard() {
             <TableBody>
               {participants.map((participant) => (
                 <TableRow key={participant.name}>
-                {/* <TableRow> */}
                   <TableCell>{participant.name}</TableCell>
                   <TableCell align="right">{participant.score}</TableCell>
                   <TableCell align="right">{participant.timeTaken}</TableCell>
