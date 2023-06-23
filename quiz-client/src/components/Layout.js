@@ -2,7 +2,6 @@ import { AppBar, Box, Button, Container, Toolbar, Typography } from "@mui/materi
 import React from "react";
 import { Outlet, useNavigate } from "react-router";
 import { useStateContext } from "../hooks/useStateContext";
-// import restart from "Results";
 
 export default function Layout() {
   const { resetContext, setContext } = useStateContext();

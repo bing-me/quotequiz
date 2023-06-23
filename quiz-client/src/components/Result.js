@@ -35,7 +35,7 @@ export default function Result() {
         calculateScore(qna);
       })
       .catch((err) => console.log(err));
-  }, );
+  }, []);
 
   const calculateScore = (qna) => {
     let tempScore = qna.reduce((acc, curr) => {
@@ -92,7 +92,6 @@ export default function Result() {
               /5
             </Typography>
             <Typography variant="h6">
-              {/* Took {getFormatedTime(context.timeTaken) + " mins"} */}
               You took {getFormatedTime(context.timeTaken)}
             </Typography>
             <Button
