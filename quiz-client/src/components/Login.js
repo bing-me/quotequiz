@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -20,12 +20,12 @@ const getFreshModel = () => ({
 
 export default function Login() {
   const { setContext, resetContext } = useStateContext();
-  // const { context, setContext, resetContext } = useStateContext();
   const navigate = useNavigate();
 
-  // const { values, setValues, errors, setErrors, handleInputChange } =
   const { values, errors, setErrors, handleInputChange } =
     useForm(getFreshModel);
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     resetContext();
@@ -33,14 +33,20 @@ export default function Login() {
 
   const login = (e) => {
     e.preventDefault();
-    if (validate())
+    if (validate()) {
+      setLoading(true); // Set loading state to true before making the API request
+
       createAPIEndpoint(ENDPOINTS.participant)
         .post(values)
         .then((res) => {
           setContext({ participantId: res.data.participantId });
           navigate("/quiz");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setLoading(false); // Set loading state to false after receiving a response or encountering an error
+        });
+    }
   };
 
   const validate = () => {
@@ -62,23 +68,23 @@ export default function Login() {
               Movie Quote Quiz
             </Typography>
             <Typography variant="body1" sx={{ my: 3 }}>
-              Welcome to the Movie Quote Quiz, the challenge for movie
-              buffs and cinephiles! Get ready to put your film knowledge to the
-              test and see if you can identify some of the most iconic lines
-              from movies spanning several decades.
+              Welcome to the Movie Quote Quiz, the challenge for movie buffs and
+              cinephiles! Get ready to put your film knowledge to the test and
+              see if you can identify some of the most iconic lines from movies
+              spanning several decades.
             </Typography>
             <Typography variant="body1" sx={{ my: 3 }}>
-              From the captivating 1970s to the exhilarating 2010s, this quiz takes you
-              on a journey through cinematic history, showcasing memorable
-              quotes from a wide range of movies.
+              From the captivating 1970s to the exhilarating 2010s, this quiz
+              takes you on a journey through cinematic history, showcasing
+              memorable quotes from a wide range of movies.
             </Typography>
           </CardContent>
         </Card>
         <Card sx={{ width: 400, mt: 5 }}>
           <CardContent sx={{ textAlign: "center" }}>
             <Typography variant="body1" sx={{ my: 3 }}>
-              Register/Login with an email and username.
-              Only your username will be displayed on the leaderboard.
+              Register/Login with an email and username. Only your username will
+              be displayed on the leaderboard.
             </Typography>
             <Box
               sx={{
@@ -109,12 +115,14 @@ export default function Login() {
                   {...(errors.name && { error: true, helperText: errors.name })}
                 />
                 <Button
+                  // onClick={handleClick}
+                  disabled={loading}
                   type="submit"
                   variant="contained"
                   size="large"
                   sx={{ width: "90%" }}
                 >
-                  Start
+                  {loading ? "Loading..." : "Login/Register"}
                 </Button>
               </form>
             </Box>
