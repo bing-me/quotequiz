@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // export const BASE_URL = "https://localhost:44325/";
-export const BASE_URL = "moviequizqpi.azurewebsites.net";
+export const BASE_URL = "https://moviequizqpi.azurewebsites.net/";
 
 export const ENDPOINTS = {
   participant: "participant",
