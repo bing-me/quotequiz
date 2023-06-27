@@ -31,8 +31,8 @@ export default function Layout() {
           <Typography variant="h4" align="center" sx={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
             Quote Quiz
           </Typography>
-          <Box position='absolute' left='80%' >
-            <Button onClick={restart}>Re-try Quiz</Button>
+          <Box position='absolute' left='80%' sx={{ display: 'flex', alignItems: 'center' }}>
+            <Button onClick={restart}>Quiz</Button>
             <Button onClick={leaderboard}>Leaderboard</Button>
             <Button onClick={logout}>Logout</Button>
           </Box>
