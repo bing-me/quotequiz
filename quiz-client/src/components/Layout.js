@@ -32,7 +32,7 @@ export default function Layout() {
             Quote Quiz
           </Typography>
           <Box position='absolute' left='80%' sx={{ display: 'flex', alignItems: 'center' }}>
-            <Button onClick={restart}>Re-try Quiz</Button>
+            <Button onClick={restart}>Quiz</Button>
             <Button onClick={leaderboard}>Leaderboard</Button>
             <Button onClick={logout}>Logout</Button>
           </Box>
